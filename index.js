@@ -8,13 +8,23 @@ var colors = [
 ]
 
 var squares = document.querySelectorAll(".square");
+var pickedColor = colors[4];
+var colorDisplay = document.querySelector("#colorDisplay");
 
-console.log(squares)
+colorDisplay.textContent = pickedColor;
 
 for(var i=0; i<squares.length; i++){
 	// change background color of squares
 	squares[i].style.background = colors[i];
 
 	// add click listener to squares
+	squares[i].addEventListener("click", function(){
+		var clickedColor = this.style.background;
+		if(clickedColor === pickedColor){
+			console.log("correct");
+		} else{
+			console.log('wrong');
+		}
+	});
 
 }
