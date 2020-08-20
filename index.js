@@ -8,55 +8,19 @@ var h1 = document.querySelector("h1");
 var resetButton = document.querySelector("#reset");
 var easyBtn = document.querySelector("#easyBtn");
 var hardBtn = document.querySelector("#hardBtn");
+var modeBtns = document.querySelectorAll(".mode");
 
-easyBtn.addEventListener("click", function(){
-	numSquares = 3;
-	hardBtn.classList.remove("selected");
-	easyBtn.classList.add("selected");
-	colors = generateRandomColors(numSquares);
-	pickedColor = pickColor();
-	colorDisplay.textContent = pickedColor;
-	for(var i=0; i<squares.length; i++){
-		if(colors[i]){
-			squares[i].style.background = colors[i];
-		} else {
-			squares[i].style.display = "none";
-		}
-	}
-});
+for(var i=0; i<modeBtns.length; i++){
+	modeBtns[i].addEventListener("click", function(){
+		modeBtns[0].classList.remove("selected");
+		modeBtns[1].classList.remove("selected");
+		this.classList.add("selected");
+		this.textContent === "Easy" ? numSquares = 3 : numSquares = 6;
+		reset();
+	});
+}
 
-hardBtn.addEventListener("click", function(){
-	numSquares = 6;
-	hardBtn.classList.add("selected");
-	easyBtn.classList.remove("selected");
-	colors = generateRandomColors(numSquares);
-	pickedColor = pickColor();
-	colorDisplay.textContent = pickedColor;
-	for(var i=0; i<squares.length; i++){
-		squares[i].style.background = colors[i];
-		squares[i].style.display = "block";
-	}
-});
-
-
-resetButton.addEventListener("click", function(){
-	// generate new colors
-	colors = generateRandomColors(numSquares);
-	// pick a random color
-	pickedColor = pickColor();
-	// update colorDisplay
-	colorDisplay.textContent = pickedColor;
-	// update colors of squares
-	for(var i=0; i<squares.length; i++){
-		squares[i].style.background = colors[i];
-	}
-	// reset the color of h1
-	h1.style.background = "steelblue";
-	// update messageDisplay
-	messageDisplay.textContent = "";
-	// update resetButton 
-	resetButton.textContent = "New Colors";
-});
+resetButton.addEventListener("click", reset);
 
 colorDisplay.textContent = pickedColor;
 
@@ -77,6 +41,30 @@ for(var i=0; i<squares.length; i++){
 		}
 	});
 
+}
+
+function reset(){
+	// generate new colors
+	colors = generateRandomColors(numSquares);
+	// pick a random color
+	pickedColor = pickColor();
+	// update colorDisplay
+	colorDisplay.textContent = pickedColor;
+	// update colors of squares
+	for(var i=0; i<squares.length; i++){
+		if(colors[i]){
+			squares[i].style.display = "block";
+			squares[i].style.background = colors[i];	
+		} else {
+			squares[i].style.display = "none";
+		}
+	}
+	// reset the color of h1
+	h1.style.background = "steelblue";
+	// update messageDisplay
+	messageDisplay.textContent = "";
+	// update resetButton 
+	resetButton.textContent = "New Colors";
 }
 
 var changeColor = (color) => {

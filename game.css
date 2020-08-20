@@ -37,6 +37,7 @@ button{
 	text-transform: uppercase;
 	height: 100%;
 	font-weight: 700;
+	outline: none;
 	color: steelblue;
 	font-size: inherit;
 	letter-spacing: 1px;
